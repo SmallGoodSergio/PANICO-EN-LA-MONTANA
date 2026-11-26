@@ -674,7 +674,7 @@ int main(int argc, char* argv[]) {
             1, 0.18f, 110.0f,
             1, 0.0f, 250.0f,
             3.0f, 1, 4,
-            255, 220, 70
+            235, 30, 40       // bala roja
         },
 
         {
@@ -683,7 +683,7 @@ int main(int argc, char* argv[]) {
             3, 0.65f, 300.0f,
             6, 0.30f, 240.0f,
             0.35f, 1, 3,
-            255, 150, 60
+            255, 55, 40       // perdigones rojos
         }
     };
 
@@ -1637,6 +1637,18 @@ int main(int argc, char* argv[]) {
         // ----------------------------------------------------
 
         for (const Bala& bala : balas) {
+
+            // Contorno oscuro para que la bala se vea sobre cualquier fondo
+            SDL_SetRenderDrawColor(ren, 43, 37, 64, 255);
+
+            SDL_FRect contorno = {
+                SDL_roundf(bala.x - bala.tam / 2.0f) - 1.0f,
+                SDL_roundf(bala.y - bala.tam / 2.0f) - 1.0f,
+                bala.tam + 2.0f,
+                bala.tam + 2.0f
+            };
+
+            SDL_RenderFillRect(ren, &contorno);
 
             SDL_SetRenderDrawColor(
                 ren,
